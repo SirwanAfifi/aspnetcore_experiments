@@ -15,6 +15,7 @@ namespace configureService
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseMiddleware<BrowserTypeMiddleware>();
             app.UseMiddleware<ShortCircuitMiddleware>();
             app.UseMiddleware<ContentMiddleware>();
         }
