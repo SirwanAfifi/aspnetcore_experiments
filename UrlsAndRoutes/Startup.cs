@@ -24,7 +24,7 @@ namespace UrlsAndRoutes
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "MapRoute",
-                    template: "{controller=Home}/{action=Index}/{id=DefaultId}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
