@@ -24,7 +24,8 @@ namespace UrlsAndRoutes
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "MyRoutes",
-                    template: "{controller:regex(^H.*)=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}"
+                        + "/{id:alpha:minlength(6)?}");
             });
         }
     }
