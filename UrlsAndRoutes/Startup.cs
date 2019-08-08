@@ -16,6 +16,12 @@ namespace UrlsAndRoutes
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap.Add("weekday", typeof(WeekDayConstraint));
+                options.LowercaseUrls = true;
+                options.AppendTrailingSlash = true;
+            });
             services.AddMvc();
         }
 
