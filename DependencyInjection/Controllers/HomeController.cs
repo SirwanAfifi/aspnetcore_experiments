@@ -11,6 +11,10 @@ namespace DependencyInjection.Controllers
         {
             this.repository = repository;
         }
-        public ViewResult Index() => View(repository.Products);
+        public ViewResult Index()
+        {
+            ViewBag.HomeController = repository.ToString();
+            return View(repository.Products);
+        }
     }
 }

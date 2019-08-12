@@ -4,6 +4,7 @@ namespace DependencyInjection.Models
 {
     public class MemoryRepository : IRepository
     {
+        private string guid = System.Guid.NewGuid().ToString();
         private Dictionary<string, Product> products;
 
         public MemoryRepository()
@@ -27,6 +28,11 @@ namespace DependencyInjection.Models
         public void DeleteProduct(Product product)
         {
             products.Remove(product.Name);
+        }
+
+        public override string ToString()
+        {
+            return guid;
         }
     }
 }
