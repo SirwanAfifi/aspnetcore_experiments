@@ -5,7 +5,12 @@ namespace DependencyInjection.Controllers
 {
     public class HomeController : Controller
     {
-        public IRepository Repository { get; set; } = new MemoryRepository();
-        public ViewResult Index() => View(Repository.Products);
+        private readonly IRepository repository;
+
+        public HomeController(IRepository repository)
+        {
+            this.repository = repository;
+        }
+        public ViewResult Index() => View(repository.Products);
     }
 }
