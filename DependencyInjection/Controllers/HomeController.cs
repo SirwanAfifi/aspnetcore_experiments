@@ -5,13 +5,7 @@ namespace DependencyInjection.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository repository;
-
-        public HomeController(IRepository repository)
-        {
-            this.repository = repository;
-        }
-        public ViewResult Index()
+        public ViewResult Index([FromServices]IRepository repository)
         {
             ViewBag.HomeController = repository.ToString();
             return View(repository.Products);
