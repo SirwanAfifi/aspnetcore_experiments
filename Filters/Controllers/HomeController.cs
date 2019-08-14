@@ -3,14 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filters.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
-        [RequireHttps]
         public IActionResult Index() => View("Message",
             "This is the Index action on the Home controller");
 
-
-        [RequireHttps]
         public IActionResult SecondAction() => View("Message",
                     "This is the SecondAction action on the Home controller");
     }
