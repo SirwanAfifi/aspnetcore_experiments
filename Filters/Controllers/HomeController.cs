@@ -5,30 +5,13 @@ namespace Filters.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            if (!Request.IsHttps)
-            {
-                return new StatusCodeResult(StatusCodes.Status403Forbidden);
-            }
-            else
-            {
-                return View("Message",
+        [RequireHttps]
+        public IActionResult Index() => View("Message",
             "This is the Index action on the Home controller");
-            }
-        }
 
-        public IActionResult SecondAction()
-        {
-            if (!Request.IsHttps)
-            {
-                return new StatusCodeResult(StatusCodes.Status403Forbidden);
-            }
-            else
-            {
-                return View("Message",
+
+        [RequireHttps]
+        public IActionResult SecondAction() => View("Message",
                     "This is the SecondAction action on the Home controller");
-            }
-        }
     }
 }
