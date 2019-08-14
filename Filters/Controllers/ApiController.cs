@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filters.Controllers
 {
-    [ApiExceptionFilter]
+    [ServiceFilter(typeof(ApiExceptionFilter))]
     public class ApiController : Controller
     {
         public JsonResult GetData()
