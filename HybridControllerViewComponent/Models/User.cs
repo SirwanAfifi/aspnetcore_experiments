@@ -14,7 +14,7 @@ namespace HybridControllerViewComponent.Models
     {
         public static IList<User> GetUsers()
         {
-            var list = new List<User>;
+            var list = new List<User>();
             for (int i = 0; i < 50; i++)
             {
                 list.Add(new User { Id = i * 2, Name = $"Name {++i}", LastName = $"LastName {++i}", Age = (++i * 2) / 2 });
