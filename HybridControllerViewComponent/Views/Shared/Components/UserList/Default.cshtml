@@ -1,5 +1,5 @@
 @model IList<User>
 @foreach (var user in Model)
 {
-    <li><a href="#">@user.Name</a></li>
+    <li><a asp-controller="UserManager" asp-action="Edit" asp-route-id="@user.Id">@user.Name</a></li>
 }
