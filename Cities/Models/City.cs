@@ -6,4 +6,12 @@ namespace Cities.Models
         public string Country { get; set; }
         public int? Population { get; set; }
     }
+
+    public enum CountryNames
+    {
+        UK,
+        USA,
+        France,
+        China
+    }
 }
