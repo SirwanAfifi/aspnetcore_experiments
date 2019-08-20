@@ -1,6 +1,6 @@
 @model City
 @{  Layout = "_Layout"; }
-<form method="post" action="/Home/Create">
+<form method="post" asp-controller="Home" asp-action="Create">
     <div class="form-group">
         <label for="Name">Name:</label>
         <input class="form-control" name="Name" />
@@ -13,7 +13,6 @@
         <label for="Population">Population:</label>
         <input class="form-control" name="Population" />
     </div>
-    <button type="submit" bs-button-color="danger">Add</button>
-    <button type="reset" class="btn btn-primary" >Reset</button>
+    <button type="submit" class="btn btn-primary">Add</button>
     <a class="btn btn-primary" href="/Home/Index">Cancel</a>
 </form>
