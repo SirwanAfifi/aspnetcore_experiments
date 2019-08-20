@@ -14,7 +14,9 @@ namespace Cities.Controllers
 
         public ViewResult Index() => View(repository.Cities);
         public ViewResult Create() => View();
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(City city)
         {
             repository.AddCity(city);
