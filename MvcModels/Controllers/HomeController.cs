@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MvcModels.Models;
@@ -36,5 +37,8 @@ namespace MvcModels.Controllers
             [Bind(Prefix = nameof(Person.HomeAddress))]AddressSummary summary) => View(summary);
 
         public ViewResult Names(string[] names) => View(names ?? new string[0]);
+
+        public ViewResult Address(IList<AddressSummary> addresses) =>
+            View(addresses ?? new List<AddressSummary>());
     }
 }
