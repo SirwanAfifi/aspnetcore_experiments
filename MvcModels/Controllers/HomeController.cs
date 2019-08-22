@@ -13,6 +13,17 @@ namespace MvcModels.Controllers
             this.repo = repo;
         }
 
-        public ViewResult Index(int id) => View(repo[id] ?? repo.People.First());
+        public IActionResult Index(int? id)
+        {
+            Person person;
+            if (id.HasValue && (person = repo[id.Value]) != null)
+            {
+                return View(person);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
