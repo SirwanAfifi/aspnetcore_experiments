@@ -19,6 +19,8 @@ namespace Users
         {
             services.AddTransient<IPasswordValidator<AppUser>,
                 CustomPasswordValidator>();
+            services.AddTransient<IUserValidator<AppUser>,
+                CustomUserValidator>();
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseMySql(Configuration["Data:SportStoreIdentity:ConnectionString"]));
