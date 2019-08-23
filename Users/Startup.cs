@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Users.Infrastructure;
 using Users.Models;
 
 namespace Users
@@ -16,6 +17,9 @@ namespace Users
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IPasswordValidator<AppUser>,
+                CustomPasswordValidator>();
+
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseMySql(Configuration["Data:SportStoreIdentity:ConnectionString"]));
             services.AddIdentity<AppUser, IdentityRole>(opts =>
