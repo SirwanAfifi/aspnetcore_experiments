@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,9 @@ namespace Users
                 CustomPasswordValidator>();
             services.AddTransient<IUserValidator<AppUser>,
                 CustomUserValidator>();
+
+            services.AddSingleton<IClaimsTransformation,
+                            LocationClaimsProvider>();
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseMySql(Configuration["Data:SportStoreIdentity:ConnectionString"]));
