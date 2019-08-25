@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +26,16 @@ namespace Users
 
             services.AddSingleton<IClaimsTransformation,
                             LocationClaimsProvider>();
+
+            services.AddAuthorization(opts =>
+            {
+                opts.AddPolicy("DCUsers", policy =>
+                {
+                    policy.RequireRole("Users");
+                    policy.RequireClaim(ClaimTypes.StateOrProvince, "DC");
+                });
+            });
+
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseMySql(Configuration["Data:SportStoreIdentity:ConnectionString"]));
