@@ -20,5 +20,6 @@ namespace AwesomeSauce.Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+        // .UseHttpSys(); // Windows-only server
     }
 }
