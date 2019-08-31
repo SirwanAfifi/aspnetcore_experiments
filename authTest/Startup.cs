@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,20 +20,35 @@ namespace authTest
         {
             app.Use(async (context, next) =>
             {
-                var user = context.Request.Query["username"];
-                var password = context.Request.Query["password"];
-                if (user == "sirwan" && password == "afifi")
+                var auth = context.Request.Headers["Authorization"].ToString();
+                if (!string.IsNullOrEmpty(auth))
                 {
-                    var personList = new List<string> {
-                    "Sirwan",
-                    "Kaywan"
-                };
-                    await context.Response.WriteAsync(personList.Aggregate((val1, val2) => val1 + "\n" + val2));
+                    var tmp = auth.Split(' ');
+                    byte[] data = Convert.FromBase64String(tmp[0]);
+                    string decodedString = Encoding.UTF8.GetString(data);
+
+                    var creds = decodedString.Split(':');
+                    var username = creds[0];
+                    var password = creds[1];
+
+                    if ((username == "sirwan") && (password == "afifi"))
+                    {
+
+                        context.Response.StatusCode = 200;
+                        await context.Response.WriteAsync("<html><body>Congratulations you just Sirwan!</body></html>");
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 401;
+                        context.Response.Headers.Add("WWW-Authenticate", "Basic realm='Secure Area'");
+                        await context.Response.WriteAsync("<html><body>You shall not pass</body></html>");
+                    }
                 }
                 else
                 {
-                    context.Response.Headers.Add("WWW-Authenticate", "Basic");
                     context.Response.StatusCode = 401;
+                    context.Response.Headers.Add("WWW-Authenticate", "Basic realm='Secure Area'");
+                    await context.Response.WriteAsync("<html><body>Need some creds son</body></html>");
                 }
             });
         }
