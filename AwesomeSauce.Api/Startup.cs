@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AwesomeSauce.Api.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,7 @@ namespace AwesomeSauce.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // services.AddHostedService<AwesomeHostedService>();
+            services.AddMemoryCache();
             services.AddMvc();
             IdentityModelEventSource.ShowPII = true;
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -41,6 +43,8 @@ namespace AwesomeSauce.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseAuthentication();
+
+            app.UseMiddleware<AwesomeRateLimiterMiddleware>();
 
             app.UseMvc();
 
