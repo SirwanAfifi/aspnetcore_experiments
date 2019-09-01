@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AwesomeSauce.Api
@@ -22,6 +23,7 @@ namespace AwesomeSauce.Api
         {
             // services.AddHostedService<AwesomeHostedService>();
             services.AddMvc();
+            IdentityModelEventSource.ShowPII = true;
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
@@ -40,7 +42,7 @@ namespace AwesomeSauce.Api
         {
             app.UseAuthentication();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
 
             app.Run(async (context) =>
             {
