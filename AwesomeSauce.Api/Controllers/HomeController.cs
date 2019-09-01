@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AwesomeSauce.Api.Controllers
 {
+    [Route("/api/secret")]
     [Authorize]
     public class HomeController : Controller
     {
