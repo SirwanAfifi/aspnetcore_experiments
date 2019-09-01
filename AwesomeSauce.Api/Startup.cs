@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using AwesomeSauce.Api.Infrastructure;
+using AwesomeSauce.Api.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,9 +40,11 @@ namespace AwesomeSauce.Api
                             ValidAudience = Configuration["JWT:Audience"]
                         };
                     });
+            // services.AddSingleton<IPersonRepository, PersonRepository>();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseMiddleware<AwesomeGraphQLMiddleware>();
             app.UseAuthentication();
 
             app.UseMiddleware<AwesomeRateLimiterMiddleware>();
